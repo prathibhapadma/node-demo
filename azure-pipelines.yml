@@ -16,25 +16,25 @@ steps:
         echo '$(Build.SourcesDirectory)'
         cd $(Build.SourcesDirectory)
         ls -lrta
-# - task: Cache@2
-#   displayName: 'Cache'
-#   inputs:
-#     key: 'npm | "$(Agent.OS)" | */package.json'
-#     restoreKeys: |
-#        npm | "$(Agent.OS)"
-#        npm
-#     path: '$(PACKAGES)'
-#     cacheHitVar: 'CACHE_RESTORED'
-# - task: NodeTool@0
-#   displayName: 'Global - Tools - Install Node 8.9.1' #building
-#   enabled: true
-#   inputs:
-#     versionSpec: '8.9.1'
-# - task: Npm@1
-#   displayName: 'Global - Tools - Install npm 6.4.1'
-#   enabled: true
-#   inputs:
-#     command: 'custom'
-#     workingDir: '$(Build.SourcesDirectory)'
-#     customCommand: 'i -g npm@6.4.1'
+  - task: Cache@2
+    displayName: 'Cache'
+    inputs:
+      key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
+      restoreKeys: |
+        npm | "$(Agent.OS)"
+        npm
+      path: '$(PACKAGES)'
+      cacheHitVar: 'CACHE_RESTORED'
+  - task: NodeTool@0
+    displayName: 'Global - Tools - Install Node 8.9.1' #building
+    enabled: true
+    inputs:
+      versionSpec: '8.9.1'
+  - task: Npm@1
+    displayName: 'Global - Tools - Install npm 6.4.1'
+    enabled: true
+    inputs:
+      command: 'custom'
+      workingDir: '$(Build.SourcesDirectory)'
+      customCommand: 'i -g npm@6.4.1'
 
