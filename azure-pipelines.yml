@@ -4,7 +4,7 @@ pool:
   vmImage: windows-latest
 
 variables:
-  npm_config_cache: $(Agent.HomeDirectory)/.npm
+  npm_config_cache: 'C:/hostedtoolcache/windows/node' #$(Agent.HomeDirectory)/.npm
 
 steps:
   # - task: Bash@3
