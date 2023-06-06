@@ -12,7 +12,6 @@ steps:
       targetType: 'inline'
       script: |
         # Write your commands here
-        
         echo '$(Build.SourcesDirectory)'
         cd $(Build.SourcesDirectory)
         ls -lrta
