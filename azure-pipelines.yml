@@ -13,6 +13,8 @@ steps:
       script: |
         # Write your commands here
         echo '$(Build.SourcesDirectory)'
+        cd $(Pipeline.Workspace)
+        ls -lrta
         cd $(Build.SourcesDirectory)
         ls -lrta
   - task: Cache@2
