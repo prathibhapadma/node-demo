@@ -4,7 +4,7 @@ pool:
   vmImage: windows-latest
 
 variables:
-  PACKAGES: $(Pipeline.Workspace)/.npm
+  PACKAGES: $(Agent.HomeDirectory)/.npm
 
 steps:
   - task: Bash@3
