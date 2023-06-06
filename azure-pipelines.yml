@@ -13,7 +13,23 @@ steps:
       script: |
         # Write your commands here
         echo '$(Build.SourcesDirectory)'
-        cd $(Agent.BuildDirectory)
+        echo "$(Agent.TempDirectory)"
+        echo "$(Agent.BuildDirectory)"
+        echo "$(Agent.WorkFolder)"
+        echo "$(Agent.ToolsDirectory)"
+        echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
+        echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
+        echo "Agent.TempDirectory: $(Agent.TempDirectory)"
+        echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
+        echo "Agent.WorkFolder: $(Agent.WorkFolder)"
+        echo "Build.ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)"
+        echo "Build.BinariesDirectory: $(Build.BinariesDirectory)"
+        echo "Build.Repository.LocalPath: $(Build.Repository.LocalPath)"
+        echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
+        echo "Build.StagingDirectory: $(Build.StagingDirectory)"
+        echo "Common.TestResultsDirectory: $(Common.TestResultsDirectory)"
+        echo "Pipeline.Workspace: $(Pipeline.Workspace)"
+        echo "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
         ls -lrta
         cd $(Build.SourcesDirectory)
         ls -lrta
