@@ -13,7 +13,7 @@ steps:
       script: |
         # Write your commands here
         echo '$(Build.SourcesDirectory)'
-        cd $(Pipeline.Workspace)
+        cd $(Agent.BuildDirectory)
         ls -lrta
         cd $(Build.SourcesDirectory)
         ls -lrta
