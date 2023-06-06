@@ -1,0 +1,27 @@
+trigger: none
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  PACKAGES: $(Pipeline.Workspace)/.npm
+
+steps:
+# - task: Cache@2
+#   displayName: 'Cache'
+#   inputs:
+#     key: 'npm | "$(Agent.OS)" | package.json'
+#     restoreKeys: |
+#        npm | "$(Agent.OS)"
+#        npm
+#     path: '$(PACKAGES)'
+#     cacheHitVar: 'CACHE_RESTORED'
+ 
+- task: Npm@1
+  displayName: 'Global - Tools - Install npm 6.4.1'
+  enabled: true
+  inputs:
+    command: 'custom'
+    workingDir: '$(Build.SourcesDirectory)'
+    customCommand: 'i -g npm@6.4.1'
+
