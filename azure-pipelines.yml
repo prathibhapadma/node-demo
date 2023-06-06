@@ -7,41 +7,37 @@ variables:
   PACKAGES: $(Agent.HomeDirectory)/.npm
 
 steps:
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-        # Write your commands here
-        echo '$(Build.SourcesDirectory)'
-        echo "$(Agent.TempDirectory)"
-        echo "$(Agent.BuildDirectory)"
-        echo "$(Agent.WorkFolder)"
-        echo "$(Agent.ToolsDirectory)"
-        echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
-        echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
-        echo "Agent.TempDirectory: $(Agent.TempDirectory)"
-        echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
-        echo "Agent.WorkFolder: $(Agent.WorkFolder)"
-        echo "Build.ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)"
-        echo "Build.BinariesDirectory: $(Build.BinariesDirectory)"
-        echo "Build.Repository.LocalPath: $(Build.Repository.LocalPath)"
-        echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
-        echo "Build.StagingDirectory: $(Build.StagingDirectory)"
-        echo "Common.TestResultsDirectory: $(Common.TestResultsDirectory)"
-        echo "Pipeline.Workspace: $(Pipeline.Workspace)"
-        echo "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
-        ls -lrta
-        cd $(Build.SourcesDirectory)
-        ls -lrta
-  - task: Cache@2
-    displayName: 'Cache'
-    inputs:
-      key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
-      restoreKeys: |
-        npm | "$(Agent.OS)"
-        npm
-      path: '$(PACKAGES)'
-      cacheHitVar: 'CACHE_RESTORED'
+  # - task: Bash@3
+  #   inputs:
+  #     targetType: 'inline'
+  #     script: |
+  #       # Write your commands here
+  #       cd $(Agent.ToolsDirectory)
+  #       ls -lrta
+  #     # echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
+  #     # echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
+  #     # echo "Agent.TempDirectory: $(Agent.TempDirectory)"
+  #     # echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
+  #     # echo "Agent.WorkFolder: $(Agent.WorkFolder)"
+  #     # echo "Build.ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)"
+  #     # echo "Build.BinariesDirectory: $(Build.BinariesDirectory)"
+  #     # echo "Build.Repository.LocalPath: $(Build.Repository.LocalPath)"
+  #     # echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
+  #     # echo "Build.StagingDirectory: $(Build.StagingDirectory)"
+  #     # echo "Common.TestResultsDirectory: $(Common.TestResultsDirectory)"
+  #     # echo "Pipeline.Workspace: $(Pipeline.Workspace)"
+  #     # echo "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
+  #     # ls -lrta
+      
+  # - task: Cache@2
+  #   displayName: 'Cache'
+  #   inputs:
+  #     key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
+  #     restoreKeys: |
+  #       npm | "$(Agent.OS)"
+  #       npm
+  #     path: '$(PACKAGES)'
+  #     cacheHitVar: 'CACHE_RESTORED'
   - task: NodeTool@0
     displayName: 'Global - Tools - Install Node 8.9.1' #building
     enabled: true
@@ -54,4 +50,16 @@ steps:
       command: 'custom'
       workingDir: '$(Build.SourcesDirectory)'
       customCommand: 'i -g npm@6.4.1'
-
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Write your commands here
+        cd $(Agent.ToolsDirectory)
+        ls -lrta
+        cd $(Agent.WorkFolder)
+        ls -lrta
+        cd $(Agent.HomeDirectory)
+        ls -lrta
+        cd $(Agent.TempDirectory)
+        ls -lrta
