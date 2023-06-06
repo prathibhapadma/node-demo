@@ -4,7 +4,7 @@ pool:
   vmImage: windows-latest
 
 variables:
-  PACKAGES: $(Agent.HomeDirectory)/.npm
+  npm_config_cache: $(Agent.HomeDirectory)/.npm
 
 steps:
   # - task: Bash@3
@@ -36,19 +36,20 @@ steps:
   #     restoreKeys: |
   #       npm | "$(Agent.OS)"
   #       npm
-  #     path: '$(PACKAGES)'
+  #     path: '$(npm_config_cache)'
   #     cacheHitVar: 'CACHE_RESTORED'
   - task: NodeTool@0
     displayName: 'Global - Tools - Install Node 8.9.1' #building
     enabled: true
     inputs:
       versionSpec: '8.9.1'
+    workingDir: $(npm_config_cache)
   - task: Npm@1
     displayName: 'Global - Tools - Install npm 6.4.1'
     enabled: true
     inputs:
       command: 'custom'
-      workingDir: '$(Build.SourcesDirectory)'
+      workingDir: '$(npm_config_cache)'
       customCommand: 'i -g npm@6.4.1'
   - task: Bash@3
     inputs:
