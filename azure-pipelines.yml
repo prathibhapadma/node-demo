@@ -49,8 +49,8 @@ steps:
     enabled: true
     inputs:
       command: 'custom'
-      workingDir: '$(Build.SourcesDirectory)'
-      customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'
+      workingDir: '$(npm_config_cache)'
+      customCommand: 'i -g npm@6.4.1' #'--cache $(npm_config_cache)'
   - task: UseDotNet@2
     displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
     enabled: true
