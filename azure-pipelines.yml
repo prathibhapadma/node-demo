@@ -6,6 +6,7 @@ pool:
 variables:
   npm_config_cache: 'C:/hostedtoolcache/windows/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
   dotnet_config_cache: 'C:/hostedtoolcache/windows/.dotnet'
+  
 steps:
   - task: Bash@3
     inputs:
