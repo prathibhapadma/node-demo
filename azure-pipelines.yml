@@ -5,7 +5,7 @@ pool:
 
 variables:
   npm_config_cache: 'C:/hostedtoolcache/windows/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
-
+  dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
 steps:
   - task: Bash@3
     inputs:
@@ -44,31 +44,39 @@ steps:
     inputs:
       versionSpec: '8.9.1'
       workingDir: $(npm_config_cache)
-      
-  # - task: Npm@1
-  #   displayName: 'Global - Tools - Install npm 6.4.1'
-  #   enabled: true
-  #   inputs:
-  #     command: 'custom'
-  #     workingDir: '$(npm_config_cache)'
-  #     customCommand: 'i -g npm@6.4.1'
   - task: Npm@1
     displayName: 'Global - Tools - Install npm 6.4.1' # bulding
     enabled: true
     inputs:
       command: 'custom'
       workingDir: '$(Build.SourcesDirectory)'
-      customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'    
-  - task: Bash@3
+      customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'
+  - task: UseDotNet@2
+    displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
+    enabled: true
     inputs:
-      targetType: 'inline'
-      script: |
-        # Write your commands here
-        cd $(Agent.ToolsDirectory)
-        ls -lrta
-        cd $(Agent.WorkFolder)
-        ls -lrta
-        cd $(Agent.HomeDirectory)
-        ls -lrta
-        cd $(Agent.TempDirectory)
-        ls -lrta
+      version: '6.0.x'
+      performMultiLevelLookup: true  
+      installationPath: '$(dotnet_config_cache)'
+  # - task: gulp@0
+  #   inputs:
+  #     gulpFile: 'gulpfile.js'
+  #     targets: 'dsdsdvd'
+  #     arguments: 'xvcxvc'
+  #     workingDirectory: 'vcxvcxv'
+  #     gulpjs: 'node_modules/gulp/bin/gulp.js'
+  #     enableCodeCoverage: false
+
+  # - task: Bash@3
+  #   inputs:
+  #     targetType: 'inline'
+  #     script: |
+  #       # Write your commands here
+  #       cd $(Agent.ToolsDirectory)
+  #       ls -lrta
+  #       cd $(Agent.WorkFolder)
+  #       ls -lrta
+  #       cd $(Agent.HomeDirectory)
+  #       ls -lrta
+  #       cd $(Agent.TempDirectory)
+  #       ls -lrta
