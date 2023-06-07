@@ -4,7 +4,7 @@ pool:
   vmImage: windows-latest
 
 variables:
-  npm_config_cache: '$(Agent.HomeDirectory)/.npm' #'C:/hostedtoolcache/windows/.npm' #$(Agent.HomeDirectory)/.npm node
+  npm_config_cache: '$(Agent.ToolsDirectory)/.npm' #'C:/hostedtoolcache/windows/.npm' #$(Agent.HomeDirectory)/.npm node
 
 steps:
   - task: Bash@3
@@ -12,7 +12,7 @@ steps:
       targetType: 'inline'
       script: |
         # Write your commands here
-        echo "$(Agent.HomeDirectory)/.npm"
+        echo "$(Agent.ToolsDirectory)/.npm"
   #       cd $(Agent.ToolsDirectory)
   #       ls -lrta
   #     # echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
