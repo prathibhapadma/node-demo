@@ -32,10 +32,10 @@ steps:
   - task: Cache@2
     displayName: 'Cache'
     inputs:
-      key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
-      restoreKeys: |
-        npm | "$(Agent.OS)"
-        npm
+      key: $(Build.SourcesDirectory)/package.json #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
+      # restoreKeys: |
+      #   npm | "$(Agent.OS)"
+      #   npm
       path: '$(npm_config_cache)'
       cacheHitVar: 'CACHE_RESTORED'
   - task: NodeTool@0
@@ -44,6 +44,7 @@ steps:
     inputs:
       versionSpec: '8.9.1'
       workingDir: $(npm_config_cache)
+      
   # - task: Npm@1
   #   displayName: 'Global - Tools - Install npm 6.4.1'
   #   enabled: true
@@ -51,13 +52,13 @@ steps:
   #     command: 'custom'
   #     workingDir: '$(npm_config_cache)'
   #     customCommand: 'i -g npm@6.4.1'
-  # - task: Npm@1
-  #   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
-  #   enabled: true
-  #   inputs:
-  #     command: 'custom'
-  #     workingDir: '$(Build.SourcesDirectory)'
-  #     customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'    
+  - task: Npm@1
+    displayName: 'Global - Tools - Install npm 6.4.1' # bulding
+    enabled: true
+    inputs:
+      command: 'custom'
+      workingDir: '$(Build.SourcesDirectory)'
+      customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'    
   - task: Bash@3
     inputs:
       targetType: 'inline'
