@@ -6,7 +6,7 @@ pool:
 variables:
   npm_config_cache: 'C:/hostedtoolcache/windows/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
   dotnet_config_cache: 'C:/hostedtoolcache/windows/.dotnet'
-  
+
 steps:
   - task: Bash@3
     inputs:
@@ -59,6 +59,7 @@ steps:
       version: '6.0.x'
       performMultiLevelLookup: true  
       installationPath: '$(dotnet_config_cache)'
+      
   # - task: gulp@0
   #   inputs:
   #     gulpFile: 'gulpfile.js'
