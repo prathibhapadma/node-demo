@@ -51,7 +51,7 @@ steps:
     enabled: true
     inputs:
       command: 'custom'
-      workingDir: '$(Build.SourcesDirectory)'
+      #workingDir: '$(Build.SourcesDirectory)'
       customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')  
   - task: UseDotNet@2
