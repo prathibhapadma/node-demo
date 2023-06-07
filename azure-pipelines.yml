@@ -52,18 +52,13 @@ steps:
       command: 'custom'
       #workingDir: '$(Build.SourcesDirectory)'
       customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'
-  # - task: Cache@2
-  #   displayName: 'DotNet Cache'
-  #   inputs:
-  #     key: $(Build.SourcesDirectory)/frontend    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
-  #     path: '$(npm_config_cache)'      
   - task: Npm@1
     displayName: 'Frontend - npm - install'
     enabled: true
     inputs:
       command: 'custom'
       #workingDir: '$(Build.SourcesDirectory)/frontend'
-      customCommand: 'install --cache $(npm_config_cache)' #--no-optional 
+      customCommand: 'install' #--no-optional #--cache $(npm_config_cache)
   - task: Npm@1
     displayName: 'Frontend - npm - run build'
     enabled: true
