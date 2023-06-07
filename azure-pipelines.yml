@@ -4,7 +4,7 @@ pool:
   vmImage: windows-latest
 
 variables:
-  npm_config_cache: 'C:/hostedtoolcache/windows/.npm' #$(Agent.HomeDirectory)/.npm node
+  npm_config_cache: '$(Agent.HomeDirectory)/.npm' #'C:/hostedtoolcache/windows/.npm' #$(Agent.HomeDirectory)/.npm node
 
 steps:
   # - task: Bash@3
@@ -38,7 +38,7 @@ steps:
       path: '$(npm_config_cache)'
       cacheHitVar: 'CACHE_RESTORED'
   - task: NodeTool@0
-    displayName: 'Global - Tools - Install Node 8.9.1' #building
+    displayName: 'Install Node 8.9.1' #building
     enabled: true
     inputs:
       versionSpec: '8.9.1'
