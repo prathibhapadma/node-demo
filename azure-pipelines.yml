@@ -50,13 +50,6 @@ steps:
     enabled: true
     inputs:
       command: 'custom'
-      workingDir: '$(npm_config_cache)'
-      customCommand: 'i -g npm@6.4.1'    
-  - task: Npm@1
-    displayName: 'Global - Tools - Install npm 6.4.1' # bulding
-    enabled: true
-    inputs:
-      command: 'custom'
       #workingDir: '$(Build.SourcesDirectory)'
       customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'
   - task: Cache@2
