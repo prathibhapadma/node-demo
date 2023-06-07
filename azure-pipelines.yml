@@ -58,7 +58,7 @@ steps:
     inputs:
       command: 'custom'
       #workingDir: '$(Build.SourcesDirectory)/frontend'
-      customCommand: 'install --no-optional --cache $(npm_config_cache)'
+      customCommand: 'install --cache $(npm_config_cache)' #--no-optional 
   - task: Npm@1
     displayName: 'Frontend - npm - run build'
     enabled: true
