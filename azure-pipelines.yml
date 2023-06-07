@@ -38,30 +38,36 @@ steps:
       #   npm | "$(Agent.OS)"
       #   npm
       path: '$(npm_config_cache)'
-      cacheHitVar: NPM_CACHE_RESTORED
+      cacheHitVar: 'CACHE_RESTORED'
   - task: NodeTool@0
     displayName: 'Install Node 8.9.1' #building
     enabled: true
     inputs:
       versionSpec: '8.9.1'
       workingDir: $(npm_config_cache)
-    condition: ne(variables.NPM_CACHE_RESTORED, 'true')  
+  - task: Npm@1
+    displayName: 'Global - Tools - Install npm 6.4.1' # bulding
+    enabled: true
+    inputs:
+      command: 'custom'
+      workingDir: '$(npm_config_cache)'
+      customCommand: 'i -g npm@6.4.1'    
   - task: Npm@1
     displayName: 'Global - Tools - Install npm 6.4.1' # bulding
     enabled: true
     inputs:
       command: 'custom'
       #workingDir: '$(Build.SourcesDirectory)'
-      customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'
-    condition: ne(variables.NPM_CACHE_RESTORED, 'true')  
+      customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'  
   - task: UseDotNet@2
     displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
     enabled: true
     inputs:
       version: '6.0.x'
       performMultiLevelLookup: true
-      installationPath: '$(dotnet_config_cache)'
-    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+      workingDir: '$(dotnet_config_cache)'
+     # installationPath: '$(dotnet_config_cache)'
+
   # - task: gulp@0
   #   inputs:
   #     gulpFile: 'gulpfile.js'
