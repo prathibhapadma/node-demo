@@ -50,8 +50,8 @@ steps:
     enabled: true
     inputs:
       command: 'custom'
-      workingDir: '$(npm_config_cache)'
-      customCommand: 'i -g npm@6.4.1' #'--cache $(npm_config_cache)'
+      workingDir: '$(Build.SourcesDirectory)'
+      customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'
   - task: UseDotNet@2
     displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
     enabled: true
@@ -59,7 +59,7 @@ steps:
       version: '6.0.x'
       performMultiLevelLookup: true  
       installationPath: '$(dotnet_config_cache)'
-      
+
   # - task: gulp@0
   #   inputs:
   #     gulpFile: 'gulpfile.js'
