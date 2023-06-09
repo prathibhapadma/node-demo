@@ -41,46 +41,49 @@ steps:
       cacheHitVar: 'CACHE_RESTORED'
   - task: NodeTool@0
     displayName: 'Install Node 8.9.1' #building
+    condition: eq(variables.PSModules_IsCached, 'true')
     enabled: true
     inputs:
       versionSpec: '8.9.1'
       workingDir: $(npm_config_cache)
   - task: Npm@1
     displayName: 'Global - Tools - Install npm 6.4.1' # bulding
+    condition: ne(variables.PSModules_IsCached, 'true')
     enabled: true
     inputs:
       command: 'custom'
       #workingDir: '$(Build.SourcesDirectory)'
       customCommand: 'i -g npm@6.4.1 --cache $(npm_config_cache)'
-  - task: Npm@1
-    displayName: 'Frontend - npm - install'
-    enabled: true
-    inputs:
-      command: 'custom'
-      #workingDir: '$(Build.SourcesDirectory)/frontend'
-      customCommand: 'install' #--no-optional #--cache $(npm_config_cache)
-  - task: Npm@1
-    displayName: 'Frontend - npm - run build'
-    enabled: true
-    inputs:
-      command: 'custom'
-      #workingDir: '$(Build.SourcesDirectory)/frontend'
-      customCommand: 'run build'
-  - task: Npm@1
-    displayName: 'Frontend - npm - run release'
-    enabled: true
-    inputs:
-      command: 'custom'
-      #workingDir: '$(Build.SourcesDirectory)/frontend'
-      customCommand: 'run release --cache $(npm_config_cache)'          
-  - task: UseDotNet@2
-    displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
-    enabled: true
-    inputs:
-      version: '6.0.x'
-      performMultiLevelLookup: true
-      workingDir: '$(dotnet_config_cache)'
-     # installationPath: '$(dotnet_config_cache)'
+      
+  # - task: Npm@1
+  #   displayName: 'Frontend - npm - install'
+  #   enabled: true
+  #   inputs:
+  #     command: 'custom'
+  #     #workingDir: '$(Build.SourcesDirectory)/frontend'
+  #     customCommand: 'install' #--no-optional #--cache $(npm_config_cache)
+  # - task: Npm@1
+  #   displayName: 'Frontend - npm - run build'
+  #   enabled: true
+  #   inputs:
+  #     command: 'custom'
+  #     #workingDir: '$(Build.SourcesDirectory)/frontend'
+  #     customCommand: 'run build'
+  # - task: Npm@1
+  #   displayName: 'Frontend - npm - run release'
+  #   enabled: true
+  #   inputs:
+  #     command: 'custom'
+  #     #workingDir: '$(Build.SourcesDirectory)/frontend'
+  #     customCommand: 'run release --cache $(npm_config_cache)'          
+  # - task: UseDotNet@2
+  #   displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
+  #   enabled: true
+  #   inputs:
+  #     version: '6.0.x'
+  #     performMultiLevelLookup: true
+  #     workingDir: '$(dotnet_config_cache)'
+  #    # installationPath: '$(dotnet_config_cache)'
 
   # - task: gulp@0
   #   inputs:
