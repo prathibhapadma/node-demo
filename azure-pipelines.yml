@@ -16,7 +16,10 @@ steps:
       # restoreKeys: |
       #   npm | "$(Agent.OS)"
       #   npm
-      path: '$(npm_config_cache)'
+      path: |
+        '$(npm_config_cache)'
+        '$(node_config_cache)'
+        '$(dotnet_config_cache)'
       cacheHitVar: 'CACHE_RESTORED'
   - task: NodeTool@0
     displayName: 'Install Node 8.9.1' #building
