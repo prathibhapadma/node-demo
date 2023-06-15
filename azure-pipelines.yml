@@ -12,7 +12,7 @@ steps:
   - task: Cache@2
     displayName: 'Cache'
     inputs:
-      key: $(Build.SourcesDirectory)/package-lock.json, $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
+      key: $(Build.SourcesDirectory)/package-lock.json | $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
       # restoreKeys: |
       #   npm | "$(Agent.OS)"
       #   npm
