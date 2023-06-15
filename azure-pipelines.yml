@@ -8,12 +8,12 @@ variables:
   dotnet_config_cache: 'C:/hostedtoolcache/windows/.dotnet'
 
 steps:
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-        # Write your commands here
-        echo "$(Agent.ToolsDirectory)/.npm"
+  # - task: Bash@3
+  #   inputs:
+  #     targetType: 'inline'
+  #     script: |
+  #       # Write your commands here
+  #       echo "$(Agent.ToolsDirectory)/.npm"
   #       cd $(Agent.ToolsDirectory)
   #       ls -lrta
   #     # echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
@@ -54,7 +54,22 @@ steps:
       command: 'custom'
       workingDir: '$(npm_config_cache)'
       customCommand: 'i -g npm@6.4.1'
-
+  - task: UseDotNet@2
+    displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
+    enabled: true
+    inputs:
+      version: '6.0.x'
+      performMultiLevelLookup: true
+      workingDir: '$(dotnet_config_cache)'
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Write your commands here
+        cd C:/hostedtoolcache/windows
+        ls -lrta
+        cd .dotnet
+        ls -lrta
   # - task: Npm@1
   #   displayName: 'Frontend - npm - install'
   #   enabled: true
@@ -94,13 +109,7 @@ steps:
   #     gulpjs: 'node_modules/gulp/bin/gulp.js'
   #     enableCodeCoverage: false
 
-  # - task: Bash@3
-  #   inputs:
-  #     targetType: 'inline'
-  #     script: |
-  #       # Write your commands here
-  #       cd $(Agent.ToolsDirectory)
-  #       ls -lrta
+
   #       cd $(Agent.WorkFolder)
   #       ls -lrta
   #       cd $(Agent.HomeDirectory)
