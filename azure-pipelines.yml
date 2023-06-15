@@ -34,6 +34,7 @@ steps:
       workingDir: '$(npm_config_cache)'
       customCommand: 'i -g npm@6.4.1'
   - task: UseDotNet@2
+    condition: eq(variables.CACHE_RESTORED, 'true')
     displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
     enabled: true
     inputs:
@@ -60,6 +61,7 @@ steps:
         echo "cd to dotnet"
         cd C:/hostedtoolcache/windows/dotnet
         ls -lrta
+        
   # - task: Npm@1
   #   displayName: 'Frontend - npm - install'
   #   enabled: true
