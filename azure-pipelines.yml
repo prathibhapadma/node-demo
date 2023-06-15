@@ -45,12 +45,17 @@ steps:
       script: |
         # Write your commands here
         cd C:/hostedtoolcache/windows
+        pwd
         ls -lrta
-        cd node
+        echo "cd to node"
+        cd C:/hostedtoolcache/windows/node
+        pwd
         ls -lrta
-        cd .npm
+        echo "cd to npm"
+        cd C:/hostedtoolcache/windows/.npm
         ls -lrta
-        cd dotnet
+        echo "cd to dotnet"
+        cd C:/hostedtoolcache/windows/dotnet
         ls -lrta
   # - task: Npm@1
   #   displayName: 'Frontend - npm - install'
