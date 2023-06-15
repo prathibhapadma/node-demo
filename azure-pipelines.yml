@@ -6,12 +6,13 @@ pool:
 variables:
   npm_config_cache: 'C:/hostedtoolcache/windows/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
   dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
+  node_config_cache: 'C:/hostedtoolcache/windows/.node'
 
 steps:
   - task: Cache@2
     displayName: 'Cache'
     inputs:
-      key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
+      key: $(Build.SourcesDirectory)/package-lock.json #package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json'
       # restoreKeys: |
       #   npm | "$(Agent.OS)"
       #   npm
@@ -23,7 +24,7 @@ steps:
     enabled: true
     inputs:
       versionSpec: '8.9.1'
-      workingDir: $(npm_config_cache)
+      workingDir: $(node_config_cache)
   - task: Npm@1
     displayName: 'Global - Tools - Install npm 6.4.1' # bulding
     condition: eq(variables.CACHE_RESTORED, 'true')
@@ -54,6 +55,8 @@ steps:
         echo "cd to npm"
         cd C:/hostedtoolcache/windows/.npm
         ls -lrta
+        cd _cacache
+        ls -la
         echo "cd to dotnet"
         cd C:/hostedtoolcache/windows/dotnet
         ls -lrta
