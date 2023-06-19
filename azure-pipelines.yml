@@ -4,113 +4,67 @@ pool:
   vmImage: windows-latest
 
 variables:
-  modulesFolder: '$(System.DefaultWorkingDirectory)/powershellmodules'
-  restoreModulesScript: '$(Build.Repository.LocalPath)/scripts/restoremodules.ps1'
+  npm_config_cache: 'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
+  dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
+  node_config_cache: 'C:/hostedtoolcache/windows/node'
 
 steps:
-- task: Cache@2
-  displayName: Cache Powershell Modules
-  # This task will restore modules from cache if key is found.
-  # If contents of restoremodules.ps1 changes, key changes and cache is not restored.
-  # If cache is restored, variable PSModules_IsCached is set to true
-  inputs:
-    key:  restoremodules | ${{ variables.restoreModulesScript }}
-    path: ${{ variables.modulesFolder }}
-    cacheHitVar: PSModules_IsCached
-- task: PowerShell@2
-  displayName: 'Download Powershell Modules'
-  # This task runs my restoremodules.ps1 script if the cache was not restored.
-  condition: ne(variables.PSModules_IsCached, 'true')
-  inputs:
-    targetType: filePath
-    filePath:  ${{ variables.restoreModulesScript }}
-    arguments: -Path ${{ variables.modulesFolder }}
-    pwsh: true
-- task: PowerShell@2
-  displayName: 'Log that cached modules were used'
-  # This task will only run if modules were restored from cache
-  # This task is pointless, just serves to show that cache is working
-  condition: eq(variables.PSModules_IsCached, 'true')
-  inputs:
-    pwsh: true
-    targetType: 'inline'
-    script: |
-      Write-Verbose -Message 'Using cached modules' -Verbose
-      Get-ChildItem -Path ${{ variables.modulesFolder }}
-- task: PowerShell@2
-  displayName: 'Load modules'
-  # This would be where your actual pipeline starts, I will just load a module to show that it works
-  inputs:
-    pwsh: true
-    targetType: 'inline'
-    script: |
-      $Env:PSModulePath = '${{ variables.modulesFolder }}', $Env:PSModulePath -join [System.IO.Path]::PathSeparator
-      Write-Host $Env:PSModulePath
-      Import-Module "ModuleBuilder"
-      Get-Module ModuleBuilder | Format-List -Property *
-
-# variables:
-#   npm_config_cache: 'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
-#   dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
-#   node_config_cache: 'C:/hostedtoolcache/windows/node'
-
-# steps:
-#   - task: Cache@2
-#     displayName: 'Cache'
-#     inputs:
-#       key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
-#       # restoreKeys: |
-#       #   npm | "$(Agent.OS)"
-#       #   npm
-#       path: '$(npm_config_cache)'
-#       cacheHitVar: 'CACHE_RESTORED'      
-#   - task: NodeTool@0
-#     displayName: 'Install Node 8.9.1' 
-#     #condition: eq(variables.CACHE_RESTORED, 'true')
-#     enabled: true
-#     inputs:
-#       versionSpec: '8.9.1'
-#       workingDir: $(npm_config_cache)
-#   - task: Npm@1
-#     displayName: 'Global - Tools - Install npm 6.4.1' # bulding
-#     #condition: eq(variables.CACHE_RESTORED, 'true')
-#     enabled: true
-#     inputs:
-#       command: 'custom'
-#       workingDir: '$(npm_config_cache)'
-#       customCommand: 'i -g npm@6.4.1'
-#   - task: UseDotNet@2
-#     #condition: eq(variables.CACHE_RESTORED, 'true')
-#     displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
-#     enabled: true
-#     inputs:
-#       version: '6.0.x'
-#       performMultiLevelLookup: true
-#       workingDir: '$(npm_config_cache)'
-#   - task: Bash@3
-#     inputs:
-#       targetType: 'inline'
-#       script: |
-#         # Write your commands here
-#         cd C:/hostedtoolcache/windows
-#         pwd
-#         ls -lrta
-#   - task: Bash@3
-#     inputs:
-#       targetType: 'inline'
-#       script: |
-#         echo "cd to node"
-#         cd C:/hostedtoolcache/windows/node
-#         pwd
-#         ls -lrta
-#         echo "cd to npm"
-#         cd C:/hostedtoolcache/windows/.npm
-#         ls -lrta
-#         cd _cacache
-#         ls -la
-#         echo "cd to dotnet"
-#         cd C:/hostedtoolcache/windows/dotnet
-#         ls -lrta
+  - task: Cache@2
+    displayName: 'Cache'
+    inputs:
+      key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
+      # restoreKeys: |
+      #   npm | "$(Agent.OS)"
+      #   npm
+      path: '$(npm_config_cache)'
+      cacheHitVar: 'CACHE_RESTORED'      
+  - task: NodeTool@0
+    displayName: 'Install Node 8.9.1' 
+    #condition: eq(variables.CACHE_RESTORED, 'true')
+    enabled: true
+    inputs:
+      versionSpec: '8.9.1'
+      workingDir: $(npm_config_cache)
+  - task: Npm@1
+    displayName: 'Global - Tools - Install npm 6.4.1' # bulding
+    #condition: eq(variables.CACHE_RESTORED, 'true')
+    enabled: true
+    inputs:
+      command: 'custom'
+      workingDir: '$(npm_config_cache)'
+      customCommand: 'i -g npm@6.4.1'
+  - task: UseDotNet@2
+    #condition: eq(variables.CACHE_RESTORED, 'true')
+    displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
+    enabled: true
+    inputs:
+      version: '6.0.x'
+      performMultiLevelLookup: true
+      workingDir: '$(npm_config_cache)'
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Write your commands here
+        cd C:/hostedtoolcache/windows
+        pwd
+        ls -lrta
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "cd to node"
+        cd C:/hostedtoolcache/windows/node
+        pwd
+        ls -lrta
+        echo "cd to npm"
+        cd C:/hostedtoolcache/windows/.npm
+        ls -lrta
+        cd _cacache
+        ls -la
+        echo "cd to dotnet"
+        cd C:/hostedtoolcache/windows/dotnet
+        ls -lrta
         
   # - task: Npm@1
   #   displayName: 'Frontend - npm - install'
