@@ -23,7 +23,8 @@ steps:
     #condition: eq(variables.CACHE_RESTORED, 'true')
     enabled: true
     inputs:
-      versionSpec: '8.9.1'    
+      versionSpec: '8.9.1'
+      workingDir: '$(npm_config_cache)'  
   - task: NodeTool@0
     displayName: 'Install Node 8.9.1' 
     #condition: eq(variables.CACHE_RESTORED, 'true')
