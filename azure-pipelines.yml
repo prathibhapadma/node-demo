@@ -6,7 +6,7 @@ pool:
 variables:
   npm_config_cache: 'C:/hostedtoolcache/windows/node_modules' #'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
   dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
-  node_config_cache: 'C:/hostedtoolcache/windows/node'
+  node_config_cache: 'C:/hostedtoolcache/windows/.npm'
 
 steps:
   - task: Cache@2
@@ -16,7 +16,9 @@ steps:
       # restoreKeys: |
       #   npm | "$(Agent.OS)"
       #   npm
-      path: '$(npm_config_cache)'
+      path: |
+        '$(npm_config_cache)'
+        '$(node_config_cache)'
       cacheHitVar: 'CACHE_RESTORED'   
   - task: NodeTool@0
     displayName: 'Install Node 8.9.1' 
