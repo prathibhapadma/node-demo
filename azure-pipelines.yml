@@ -21,7 +21,8 @@ steps:
     workingDirectory: $(npm_config_cache)
   displayName: 'Install Node.js'
 
-- script: npm ci --cache $(npm_config_cache)
+- script: npm ci 
+  workingDirectory: $(npm_config_cache) #--cache $(npm_config_cache)
   displayName: NPM Install Dependencies
 
 - script: |
