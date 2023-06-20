@@ -9,32 +9,32 @@ variables:
   node_config_cache: 'C:/hostedtoolcache/windows'
 
 steps:
-  - task: Cache@2
-    inputs:
-      key: 'package-lock.json'
-      path: $(npm_config_cache)
-    displayName: Cache NPM packages
+- task: Cache@2
+  inputs:
+    key: 'package-lock.json'
+    path: $(npm_config_cache)
+  displayName: Cache NPM packages
 
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '16.x'
-      workingDirectory: $(npm_config_cache)
-    displayName: 'Install Node.js'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.x'
+    workingDirectory: $(npm_config_cache)
+  displayName: 'Install Node.js'
 
-  - script: npm ci --cache $(npm_config_cache)
-    displayName: NPM Install Dependencies
+- script: npm ci --cache $(npm_config_cache)
+  displayName: NPM Install Dependencies
 
-  - script: |
-      npm cache ls
-      npm cache verify
-    displayName: NPM Show cache
+- script: |
+    npm cache ls
+    npm cache verify
+  displayName: NPM Show cache
 
-  - script: npm run lint
-    displayName: Lint
-  - script: npm run test:ci
-    displayName: Unit Tests
-  - script: npm run build
-    displayName: Build
+- script: npm run lint
+  displayName: Lint
+- script: npm run test:ci
+  displayName: Unit Tests
+- script: npm run build
+  displayName: Build
 
   # - task: Cache@2
   #   displayName: 'Cache'
