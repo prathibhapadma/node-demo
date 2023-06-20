@@ -147,20 +147,20 @@ steps:
       echo "$(Agent.ToolsDirectory)/.npm"
       cd $(Agent.ToolsDirectory)
       ls -lrta
-    echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
-    echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
-    echo "Agent.TempDirectory: $(Agent.TempDirectory)"
-    echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
-    echo "Agent.WorkFolder: $(Agent.WorkFolder)"
-    echo "Build.ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)"
-    echo "Build.BinariesDirectory: $(Build.BinariesDirectory)"
-    echo "Build.Repository.LocalPath: $(Build.Repository.LocalPath)"
-    echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
-    echo "Build.StagingDirectory: $(Build.StagingDirectory)"
-    echo "Common.TestResultsDirectory: $(Common.TestResultsDirectory)"
-    echo "Pipeline.Workspace: $(Pipeline.Workspace)"
-    echo "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
-    ls -lrta
+      echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
+      echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
+      echo "Agent.TempDirectory: $(Agent.TempDirectory)"
+      echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
+      echo "Agent.WorkFolder: $(Agent.WorkFolder)"
+      echo "Build.ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)"
+      echo "Build.BinariesDirectory: $(Build.BinariesDirectory)"
+      echo "Build.Repository.LocalPath: $(Build.Repository.LocalPath)"
+      echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
+      echo "Build.StagingDirectory: $(Build.StagingDirectory)"
+      echo "Common.TestResultsDirectory: $(Common.TestResultsDirectory)"
+      echo "Pipeline.Workspace: $(Pipeline.Workspace)"
+      echo "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
+      ls -lrta
 
   #       cd $(Agent.WorkFolder)
   #       ls -lrta
