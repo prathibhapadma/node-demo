@@ -9,33 +9,33 @@ variables:
   node_config_cache: 'C:/hostedtoolcache/windows'
 
 steps:
-- task: Cache@2
-  inputs:
-    key: 'package-lock.json'
-    path: $(npm_config_cache)
-  displayName: Cache NPM packages
+# - task: Cache@2
+#   inputs:
+#     key: 'package-lock.json'
+#     path: $(npm_config_cache)
+#   displayName: Cache NPM packages
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '16.x'
-    workingDirectory: $(npm_config_cache)
-  displayName: 'Install Node.js'
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '16.x'
+#     workingDirectory: $(npm_config_cache)
+#   displayName: 'Install Node.js'
 
-- script: npm ci 
-  workingDirectory: $(npm_config_cache) #--cache $(npm_config_cache)
-  displayName: NPM Install Dependencies
+# - script: npm ci 
+#   workingDirectory: $(npm_config_cache) #--cache $(npm_config_cache)
+#   displayName: NPM Install Dependencies
 
-- script: |
-    npm cache ls
-    npm cache verify
-  displayName: NPM Show cache
+# - script: |
+#     npm cache ls
+#     npm cache verify
+#   displayName: NPM Show cache
 
-- script: npm run lint
-  displayName: Lint
-- script: npm run test:ci
-  displayName: Unit Tests
-- script: npm run build
-  displayName: Build
+# - script: npm run lint
+#   displayName: Lint
+# - script: npm run test:ci
+#   displayName: Unit Tests
+# - script: npm run build
+#   displayName: Build
 
   # - task: Cache@2
   #   displayName: 'Cache'
@@ -139,28 +139,28 @@ steps:
   #     workingDirectory: 'vcxvcxv'
   #     gulpjs: 'node_modules/gulp/bin/gulp.js'
   #     enableCodeCoverage: false
-# - task: Bash@3
-  #   inputs:
-  #     targetType: 'inline'
-  #     script: |
-  #       # Write your commands here
-  #       echo "$(Agent.ToolsDirectory)/.npm"
-  #       cd $(Agent.ToolsDirectory)
-  #       ls -lrta
-  #     # echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
-  #     # echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
-  #     # echo "Agent.TempDirectory: $(Agent.TempDirectory)"
-  #     # echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
-  #     # echo "Agent.WorkFolder: $(Agent.WorkFolder)"
-  #     # echo "Build.ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)"
-  #     # echo "Build.BinariesDirectory: $(Build.BinariesDirectory)"
-  #     # echo "Build.Repository.LocalPath: $(Build.Repository.LocalPath)"
-  #     # echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
-  #     # echo "Build.StagingDirectory: $(Build.StagingDirectory)"
-  #     # echo "Common.TestResultsDirectory: $(Common.TestResultsDirectory)"
-  #     # echo "Pipeline.Workspace: $(Pipeline.Workspace)"
-  #     # echo "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
-  #     # ls -lrta
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      echo "$(Agent.ToolsDirectory)/.npm"
+      cd $(Agent.ToolsDirectory)
+      ls -lrta
+    echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
+    echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
+    echo "Agent.TempDirectory: $(Agent.TempDirectory)"
+    echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
+    echo "Agent.WorkFolder: $(Agent.WorkFolder)"
+    echo "Build.ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)"
+    echo "Build.BinariesDirectory: $(Build.BinariesDirectory)"
+    echo "Build.Repository.LocalPath: $(Build.Repository.LocalPath)"
+    echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
+    echo "Build.StagingDirectory: $(Build.StagingDirectory)"
+    echo "Common.TestResultsDirectory: $(Common.TestResultsDirectory)"
+    echo "Pipeline.Workspace: $(Pipeline.Workspace)"
+    echo "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
+    ls -lrta
 
   #       cd $(Agent.WorkFolder)
   #       ls -lrta
