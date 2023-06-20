@@ -9,29 +9,42 @@ variables:
   node_config_cache: 'C:/hostedtoolcache/windows'
 
 steps:
-  - task: Cache@2
-    displayName: 'Cache'
-    inputs:
-      key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
-      # restoreKeys: |
-      #   npm | "$(Agent.OS)"
-      #   npm
-      path: '$(npm_config_cache)'
-      cacheHitVar: 'CACHE_RESTORED'   
-  - task: NodeTool@0
-    displayName: 'Install Node 8.9.1' 
-    #condition: eq(variables.CACHE_RESTORED, 'true')
-    enabled: true
-    inputs:
-      versionSpec: '8.9.1'
-      #workingDir: '$(npm_config_cache)'  
-  - task: NodeTool@0
-    displayName: 'Install Node 8.9.1' 
-    #condition: eq(variables.CACHE_RESTORED, 'true')
-    enabled: true
-    inputs:
-      versionSpec: '8.9.1'
-      workingDir: '$(npm_config_cache)'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+  displayName: 'npm install'
+
+- script: |
+    npm run build
+  displayName: 'npm build'
+
+  # - task: Cache@2
+  #   displayName: 'Cache'
+  #   inputs:
+  #     key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
+  #     # restoreKeys: |
+  #     #   npm | "$(Agent.OS)"
+  #     #   npm
+  #     path: '$(npm_config_cache)'
+  #     cacheHitVar: 'CACHE_RESTORED'   
+  # - task: NodeTool@0
+  #   displayName: 'Install Node 8.9.1' 
+  #   #condition: eq(variables.CACHE_RESTORED, 'true')
+  #   enabled: true
+  #   inputs:
+  #     versionSpec: '8.9.1'
+  #     #workingDir: '$(npm_config_cache)'  
+  # - task: NodeTool@0
+  #   displayName: 'Install Node 8.9.1' 
+  #   #condition: eq(variables.CACHE_RESTORED, 'true')
+  #   enabled: true
+  #   inputs:
+  #     versionSpec: '8.9.1'
+  #     workingDir: '$(npm_config_cache)'
   # - task: Npm@1
   #   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
   #   #condition: eq(variables.CACHE_RESTORED, 'true')
@@ -48,30 +61,30 @@ steps:
   #     version: '6.0.x'
   #     performMultiLevelLookup: true
   #     workingDir: '$(npm_config_cache)'
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-        # Write your commands here
-        cd C:/hostedtoolcache/windows
-        pwd
-        ls -lrta
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-        echo "cd to node"
-        cd C:/hostedtoolcache/windows/node
-        pwd
-        ls -lrta
-        echo "cd to npm"
-        cd C:/hostedtoolcache/windows/.npm
-        ls -lrta
-        cd _cacache
-        ls -la
-        echo "cd to dotnet"
-        cd C:/hostedtoolcache/windows/dotnet
-        ls -lrta
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      cd C:/hostedtoolcache/windows
+      pwd
+      ls -lrta
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "cd to node"
+      cd C:/hostedtoolcache/windows/node
+      pwd
+      ls -lrta
+      echo "cd to npm"
+      cd C:/hostedtoolcache/windows/.npm
+      ls -lrta
+      cd _cacache
+      ls -la
+      echo "cd to dotnet"
+      cd C:/hostedtoolcache/windows/dotnet
+      ls -lrta
         
   # - task: Npm@1
   #   displayName: 'Frontend - npm - install'
