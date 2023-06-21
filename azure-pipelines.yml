@@ -147,7 +147,7 @@ steps:
       echo Hello world
       # Write your commands here
       echo "$(Agent.ToolsDirectory)/.npm"
-      echo "$(Build.SourcesDirectory"
+      echo "$(Build.SourcesDirectory)"
       ls 
       echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
       echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
