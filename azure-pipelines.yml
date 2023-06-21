@@ -1,7 +1,7 @@
 trigger: none
 
-pool:
-  vmImage: windows-latest
+pool: self-hosted-agent-win
+  #vmImage: windows-latest
 
 variables:
   npm_config_cache: 'C:/hostedtoolcache/windows/node_modules' #'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
