@@ -76,30 +76,31 @@ steps:
   #     version: '6.0.x'
   #     performMultiLevelLookup: true
   #     workingDir: '$(npm_config_cache)'
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      cd C:/hostedtoolcache/windows
-      pwd
-      ls -lrta
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo "cd to node"
-      cd C:/hostedtoolcache/windows/node
-      pwd
-      ls -lrta
-      echo "cd to npm"
-      cd C:/hostedtoolcache/windows/.npm
-      ls -lrta
-      cd _cacache
-      ls -la
-      echo "cd to dotnet"
-      cd C:/hostedtoolcache/windows/dotnet
-      ls -lrta
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       # Write your commands here
+#       cd C:/hostedtoolcache/windows
+#       pwd
+#       ls -lrta
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       echo "cd to node"
+#       cd C:/hostedtoolcache/windows/node
+#       pwd
+#       ls -lrta
+#       echo "cd to npm"
+#       cd C:/hostedtoolcache/windows/.npm
+#       ls -lrta
+#       cd _cacache
+#       ls -la
+#       echo "cd to dotnet"
+#       cd C:/hostedtoolcache/windows/dotnet
+#       ls -lrta
         
   # - task: Npm@1
   #   displayName: 'Frontend - npm - install'
@@ -139,10 +140,11 @@ steps:
   #     workingDirectory: 'vcxvcxv'
   #     gulpjs: 'node_modules/gulp/bin/gulp.js'
   #     enableCodeCoverage: false
-- task: Bash@3
+- task: CmdLine@2
   inputs:
-    targetType: 'inline'
     script: |
+      echo Write your commands here      
+      echo Hello world
       # Write your commands here
       echo "$(Agent.ToolsDirectory)/.npm"
       cd $(Agent.ToolsDirectory)
