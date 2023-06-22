@@ -15,55 +15,55 @@ steps:
 #     path: $(npm_config_cache)
 #   displayName: Cache NPM packages
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '16.x'
-    #workingDirectory: $(npm_config_cache)
-  displayName: 'Install Node.js'
-
-- script: npm ci 
-  #workingDirectory: $(npm_config_cache) #--cache $(npm_config_cache)
-  displayName: NPM Install Dependencies
-
-- script: |
-    npm cache ls
-    npm cache verify
-  displayName: NPM Show cache
-
-- script: npm run lint
-  displayName: Lint
-- script: npm run test:ci
-  displayName: Unit Tests
-- script: npm run build
-  displayName: Build
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       echo Write your commands here      
-#       echo "$(Agent.ToolsDirectory)"
-#       cd $(Agent.ToolsDirectory)
-#       ls
-#       echo "build - $(Build.SourcesDirectory)"
-#       cd $(Build.SourcesDirectory)
-#       ls
-#       #Remove-Item 'node'
-# - task: Cache@2
-#   displayName: 'Cache'
-#   inputs:
-#     key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
-#     # restoreKeys: |
-#     #   npm | "$(Agent.OS)"
-#     #   npm
-#     path: '$(npm_config_cache)'
-#     cacheHitVar: 'CACHE_RESTORED'   
 # - task: NodeTool@0
-#   displayName: 'Install Node 8.9.1' 
-#   condition: eq(variables.CACHE_RESTORED, 'true')
-#   enabled: true
 #   inputs:
-#     versionSpec: '8.9.1'
-#     workingDir: '$(npm_config_cache)'  
+#     versionSpec: '16.x'
+#     #workingDirectory: $(npm_config_cache)
+#   displayName: 'Install Node.js'
+
+# - script: npm ci 
+#   #workingDirectory: $(npm_config_cache) #--cache $(npm_config_cache)
+#   displayName: NPM Install Dependencies
+
+# - script: |
+#     npm cache ls
+#     npm cache verify
+#   displayName: NPM Show cache
+
+# - script: npm run lint
+#   displayName: Lint
+# - script: npm run test:ci
+#   displayName: Unit Tests
+# - script: npm run build
+#   displayName: Build
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo Write your commands here      
+      echo "$(Agent.ToolsDirectory)"
+      cd $(Agent.ToolsDirectory)
+      ls
+      echo "build - $(Build.SourcesDirectory)"
+      cd $(Build.SourcesDirectory)
+      ls
+      #Remove-Item 'node'
+- task: Cache@2
+  displayName: 'Cache'
+  inputs:
+    key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
+    # restoreKeys: |
+    #   npm | "$(Agent.OS)"
+    #   npm
+    path: '$(npm_config_cache)'
+    cacheHitVar: 'CACHE_RESTORED'   
+- task: NodeTool@0
+  displayName: 'Install Node 8.9.1' 
+  condition: eq(variables.CACHE_RESTORED, 'true')
+  enabled: true
+  inputs:
+    versionSpec: '8.9.1'
+    workingDir: '$(npm_config_cache)'  
 # - task: NodeTool@0
 #   displayName: 'Install Node 8.9.1' 
 #   #condition: eq(variables.CACHE_RESTORED, 'true')
@@ -71,22 +71,22 @@ steps:
 #   inputs:
 #     versionSpec: '8.9.1'
 #     workingDir: '$(Build.SourcesDirectory)'
-# - task: Npm@1
-#   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
-#   condition: eq(variables.CACHE_RESTORED, 'true')
-#   enabled: true
-#   inputs:
-#     command: 'custom'
-#     workingDir: '$(npm_config_cache)'
-#     customCommand: 'i -g npm@6.4.1'
-# - task: UseDotNet@2
-#   condition: eq(variables.CACHE_RESTORED, 'true')
-#   displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
-#   enabled: true
-#   inputs:
-#     version: '6.0.x'
-#     performMultiLevelLookup: true
-#     workingDir: '$(npm_config_cache)'
+- task: Npm@1
+  displayName: 'Global - Tools - Install npm 6.4.1' # bulding
+  condition: eq(variables.CACHE_RESTORED, 'true')
+  enabled: true
+  inputs:
+    command: 'custom'
+    workingDir: '$(npm_config_cache)'
+    customCommand: 'i -g npm@6.4.1'
+- task: UseDotNet@2
+  condition: eq(variables.CACHE_RESTORED, 'true')
+  displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
+  enabled: true
+  inputs:
+    version: '6.0.x'
+    performMultiLevelLookup: true
+    workingDir: '$(npm_config_cache)'
 
 # - task: Bash@3
 #   inputs:
