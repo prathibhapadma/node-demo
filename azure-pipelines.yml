@@ -45,7 +45,7 @@ steps:
             # Write your commands here
             echo "$(Agent.ToolsDirectory)"
             cd $(Agent.ToolsDirectory)
-            ls -la
+            ls
             rm -rf node
 # - task: Cache@2
 #   displayName: 'Cache'
