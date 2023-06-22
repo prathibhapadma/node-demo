@@ -43,10 +43,10 @@ steps:
       echo Write your commands here      
             echo Hello world
             # Write your commands here
-            echo "$(Agent.ToolsDirectory)"
+            echo "$(Agent.ToolsDirectory)\node"
             cd $(Agent.ToolsDirectory)\node
             ls
-            echo "$(Build.SourcesDirectory)"
+            echo "build - $(Build.SourcesDirectory)"
             cd $(Build.SourcesDirectory)
             ls
             #Remove-Item 'node'
