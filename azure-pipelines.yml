@@ -4,7 +4,7 @@ pool: self-hosted-agent-win
   #vmImage: windows-latest
 
 variables:
-  npm_config_cache: '$(Agent.ToolsDirectory)/.npm' #'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
+  npm_config_cache: '$(Agent.ToolsDirectory)' #'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
   dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
   node_config_cache: 'C:/hostedtoolcache/windows'
 
