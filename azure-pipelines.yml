@@ -41,15 +41,13 @@ steps:
     targetType: 'inline'
     script: |
       echo Write your commands here      
-            echo Hello world
-            # Write your commands here
-            echo "$(Agent.ToolsDirectory)"
-            cd $(Agent.ToolsDirectory)
-            ls
-            echo "build - $(Build.SourcesDirectory)"
-            cd $(Build.SourcesDirectory)
-            ls
-            #Remove-Item 'node'
+      echo "$(Agent.ToolsDirectory)"
+      cd $(Agent.ToolsDirectory)
+      ls
+      echo "build - $(Build.SourcesDirectory)"
+      cd $(Build.SourcesDirectory)
+      ls
+      #Remove-Item 'node'
 - task: Cache@2
   displayName: 'Cache'
   inputs:
