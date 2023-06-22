@@ -44,10 +44,7 @@ steps:
       echo "$(Agent.ToolsDirectory)"
       cd $(Agent.ToolsDirectory)
       ls
-      echo "build - $(Build.SourcesDirectory)"
-      cd $(Build.SourcesDirectory)
-      ls
-      #Remove-Item 'node'
+      npm cache --force clean
 - task: Cache@2
   displayName: 'Cache'
   inputs:
