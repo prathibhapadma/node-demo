@@ -81,7 +81,7 @@ steps:
     command: 'custom'
     workingDir: '$(npm_config_cache)'
     customCommand: 'i -g npm@6.4.1'
-- task: UseDoteqt@2
+- task: UseDotNet@2
   condition: eq(variables.CACHE_RESTORED, 'true')
   displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
   enabled: true
