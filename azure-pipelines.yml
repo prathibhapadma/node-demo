@@ -4,7 +4,7 @@ pool: self-hosted-agent-win
   #vmImage: windows-latest
 
 variables:
-  npm_config_cache: '$(Agent.ToolsDirectory)\node' #'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
+  npm_config_cache: '$(Agent.ToolsDirectory)/.npm' #'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
   dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
   node_config_cache: 'C:/hostedtoolcache/windows'
 
@@ -61,7 +61,7 @@ steps:
     cacheHitVar: 'CACHE_RESTORED'   
 - task: NodeTool@0
   displayName: 'Install Node 8.9.1' 
-  #condition: eq(variables.CACHE_RESTORED, 'true')
+  condition: ne(variables.CACHE_RESTORED, 'true')
   enabled: true
   inputs:
     versionSpec: '8.9.1'
@@ -75,14 +75,14 @@ steps:
 #     workingDir: '$(Build.SourcesDirectory)'
 - task: Npm@1
   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
-  #condition: eq(variables.CACHE_RESTORED, 'true')
+  condition: ne(variables.CACHE_RESTORED, 'true')
   enabled: true
   inputs:
     command: 'custom'
     workingDir: '$(npm_config_cache)'
     customCommand: 'i -g npm@6.4.1'
 - task: UseDotNet@2
-  #condition: eq(variables.CACHE_RESTORED, 'true')
+  condition: ne(variables.CACHE_RESTORED, 'true')
   displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
   enabled: true
   inputs:
