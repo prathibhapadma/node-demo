@@ -46,7 +46,7 @@ steps:
             echo "$(Agent.ToolsDirectory)"
             cd $(Agent.ToolsDirectory)
             ls
-            rm -rf node
+            Remove-Item 'node'
 # - task: Cache@2
 #   displayName: 'Cache'
 #   inputs:
