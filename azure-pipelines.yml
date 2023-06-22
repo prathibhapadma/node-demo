@@ -43,38 +43,25 @@ steps:
       echo Write your commands here      
             echo Hello world
             # Write your commands here
-            echo "$(Agent.ToolsDirectory)/.npm"
-            echo "$(Build.SourcesDirectory)"
-            ls 
-            echo "Agent.BuildDirectory: $(Agent.BuildDirectory)"
-            echo "Agent.HomeDirectory: $(Agent.HomeDirectory)"
-            echo "Agent.TempDirectory: $(Agent.TempDirectory)"
-            echo "Agent.ToolsDirectory: $(Agent.ToolsDirectory)"
-            echo "Agent.WorkFolder: $(Agent.WorkFolder)"
-            echo "Build.ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)"
-            echo "Build.BinariesDirectory: $(Build.BinariesDirectory)"
-            echo "Build.Repository.LocalPath: $(Build.Repository.LocalPath)"
-            echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
-            echo "Build.StagingDirectory: $(Build.StagingDirectory)"
-            echo "Common.TestResultsDirectory: $(Common.TestResultsDirectory)"
-            echo "Pipeline.Workspace: $(Pipeline.Workspace)"
-            echo "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
-            ls
-- task: Cache@2
-  displayName: 'Cache'
-  inputs:
-    key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
-    # restoreKeys: |
-    #   npm | "$(Agent.OS)"
-    #   npm
-    path: '$(npm_config_cache)'
-    cacheHitVar: 'CACHE_RESTORED'   
-- task: NodeTool@0
-  displayName: 'Install Node 8.9.1' 
-  #condition: eq(variables.CACHE_RESTORED, 'true')
-  enabled: true
-  inputs:
-    versionSpec: '8.9.1'
+            echo "$(Agent.ToolsDirectory)"
+            cd $(Agent.ToolsDirectory)
+            ls -la
+            rm -rf node
+# - task: Cache@2
+#   displayName: 'Cache'
+#   inputs:
+#     key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
+#     # restoreKeys: |
+#     #   npm | "$(Agent.OS)"
+#     #   npm
+#     path: '$(npm_config_cache)'
+#     cacheHitVar: 'CACHE_RESTORED'   
+# - task: NodeTool@0
+#   displayName: 'Install Node 8.9.1' 
+#   #condition: eq(variables.CACHE_RESTORED, 'true')
+#   enabled: true
+#   inputs:
+#     versionSpec: '8.9.1'
     #workingDir: '$(npm_config_cache)'  
 # - task: NodeTool@0
 #   displayName: 'Install Node 8.9.1' 
@@ -83,22 +70,22 @@ steps:
 #   inputs:
 #     versionSpec: '8.9.1'
 #     workingDir: '$(Build.SourcesDirectory)'
-- task: Npm@1
-  displayName: 'Global - Tools - Install npm 6.4.1' # bulding
-  #condition: eq(variables.CACHE_RESTORED, 'true')
-  enabled: true
-  inputs:
-    command: 'custom'
-    workingDir: '$(npm_config_cache)'
-    customCommand: 'i -g npm@6.4.1'
-- task: UseDotNet@2
-  #condition: eq(variables.CACHE_RESTORED, 'true')
-  displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
-  enabled: true
-  inputs:
-    version: '6.0.x'
-    performMultiLevelLookup: true
-    workingDir: '$(npm_config_cache)'
+# - task: Npm@1
+#   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
+#   #condition: eq(variables.CACHE_RESTORED, 'true')
+#   enabled: true
+#   inputs:
+#     command: 'custom'
+#     workingDir: '$(npm_config_cache)'
+#     customCommand: 'i -g npm@6.4.1'
+# - task: UseDotNet@2
+#   #condition: eq(variables.CACHE_RESTORED, 'true')
+#   displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
+#   enabled: true
+#   inputs:
+#     version: '6.0.x'
+#     performMultiLevelLookup: true
+#     workingDir: '$(npm_config_cache)'
 
 # - task: Bash@3
 #   inputs:
