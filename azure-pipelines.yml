@@ -44,9 +44,9 @@ steps:
             echo Hello world
             # Write your commands here
             echo "$(Agent.ToolsDirectory)"
-            cd $(Agent.ToolsDirectory)
+            cd $(Agent.ToolsDirectory)\node
             ls
-            Remove-Item 'node'
+            #Remove-Item 'node'
 # - task: Cache@2
 #   displayName: 'Cache'
 #   inputs:
