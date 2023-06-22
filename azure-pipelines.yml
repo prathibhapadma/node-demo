@@ -43,8 +43,8 @@ steps:
       echo Write your commands here      
             echo Hello world
             # Write your commands here
-            echo "$(Agent.ToolsDirectory)\node"
-            cd $(Agent.ToolsDirectory)\node
+            echo "$(Agent.ToolsDirectory)"
+            cd $(Agent.ToolsDirectory)
             ls
             echo "build - $(Build.SourcesDirectory)"
             cd $(Build.SourcesDirectory)
