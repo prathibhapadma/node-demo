@@ -46,6 +46,9 @@ steps:
             echo "$(Agent.ToolsDirectory)"
             cd $(Agent.ToolsDirectory)\node
             ls
+            echo "$(Build.SourcesDirectory)"
+            cd $(Build.SourcesDirectory)
+            ls
             #Remove-Item 'node'
 # - task: Cache@2
 #   displayName: 'Cache'
