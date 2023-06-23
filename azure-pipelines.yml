@@ -32,6 +32,7 @@ steps:
       node --version
       node -v
       npm -v
+      npm install npm@6.9.0
 
 # - task: Npm@1
 #   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
