@@ -44,7 +44,7 @@ steps:
       echo "$(Agent.ToolsDirectory)"
       cd $(Agent.ToolsDirectory)
       ls
-      npm cache --force clean
+      npm help
 - task: Cache@2
   displayName: 'Cache'
   inputs:
@@ -68,14 +68,14 @@ steps:
 #   inputs:
 #     versionSpec: '8.9.1'
 #     workingDir: '$(Build.SourcesDirectory)'
-- task: Npm@1
-  displayName: 'Global - Tools - Install npm 6.4.1' # bulding
-  condition: eq(variables.CACHE_RESTORED, 'true')
-  enabled: true
-  inputs:
-    command: 'custom'
-    workingDir: '$(npm_config_cache)'
-    customCommand: 'i -g npm@6.4.1'
+# - task: Npm@1
+#   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
+#   condition: eq(variables.CACHE_RESTORED, 'true')
+#   enabled: true
+#   inputs:
+#     command: 'custom'
+#     workingDir: '$(npm_config_cache)'
+#     customCommand: 'i -g npm@6.4.1'
 - task: UseDotNet@2
   condition: eq(variables.CACHE_RESTORED, 'true')
   displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
