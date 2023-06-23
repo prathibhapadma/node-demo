@@ -9,6 +9,22 @@ variables:
   node_config_cache: 'C:/hostedtoolcache/windows'
 
 steps:
+# - task: Cache@2
+#   displayName: 'Cache'
+#   inputs:
+#     key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
+#     # restoreKeys: |
+#     #   npm | "$(Agent.OS)"
+#     #   npm
+#     path: '$(npm_config_cache)'
+#     cacheHitVar: 'CACHE_RESTORED'   
+- task: NodeTool@0
+  displayName: 'Install Node 8.9.1' 
+  #condition: eq(variables.CACHE_RESTORED, 'true')
+  enabled: true
+  inputs:
+    versionSpec: '8.9.1'
+    workingDir: '$(npm_config_cache)'  
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -18,29 +34,7 @@ steps:
       cd $(Agent.ToolsDirectory)
       ls
       git help
-- task: Cache@2
-  displayName: 'Cache'
-  inputs:
-    key: $(Build.SourcesDirectory)/package.json    #'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/package.json' | $(Build.SourcesDirectory)/package-lock.json | 
-    # restoreKeys: |
-    #   npm | "$(Agent.OS)"
-    #   npm
-    path: '$(npm_config_cache)'
-    cacheHitVar: 'CACHE_RESTORED'   
-- task: NodeTool@0
-  displayName: 'Install Node 8.9.1' 
-  condition: eq(variables.CACHE_RESTORED, 'true')
-  enabled: true
-  inputs:
-    versionSpec: '8.9.1'
-    workingDir: '$(npm_config_cache)'  
-# - task: NodeTool@0
-#   displayName: 'Install Node 8.9.1' 
-#   #condition: eq(variables.CACHE_RESTORED, 'true')
-#   enabled: true
-#   inputs:
-#     versionSpec: '8.9.1'
-#     workingDir: '$(Build.SourcesDirectory)'
+      npm install
 # - task: Npm@1
 #   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
 #   condition: eq(variables.CACHE_RESTORED, 'true')
@@ -50,7 +44,7 @@ steps:
 #     workingDir: '$(npm_config_cache)'
 #     customCommand: 'i -g npm@6.4.1'
 - task: UseDotNet@2
-  condition: eq(variables.CACHE_RESTORED, 'true')
+  #condition: eq(variables.CACHE_RESTORED, 'true')
   displayName: 'Global - Tools - Ensure .NET 6.0 SDK'
   enabled: true
   inputs:
