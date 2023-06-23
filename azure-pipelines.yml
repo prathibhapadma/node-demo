@@ -9,35 +9,6 @@ variables:
   node_config_cache: 'C:/hostedtoolcache/windows'
 
 steps:
-# - task: Cache@2
-#   inputs:
-#     key: 'package-lock.json'
-#     path: $(npm_config_cache)
-#   displayName: Cache NPM packages
-
-# - task: NodeTool@0
-#   inputs:
-#     versionSpec: '16.x'
-#     #workingDirectory: $(npm_config_cache)
-#   displayName: 'Install Node.js'
-
-- script: npm ci
-
-    #aliases: clean-install, ic, install-clean, isntall-clean
-  #workingDirectory: $(npm_config_cache) #--cache $(npm_config_cache) 
-  displayName: NPM Install Dependencies
-
-# - script: |
-#     npm cache ls
-#     npm cache verify
-#   displayName: NPM Show cache
-
-# - script: npm run lint
-#   displayName: Lint
-# - script: npm run test:ci
-#   displayName: Unit Tests
-# - script: npm run build
-#   displayName: Build
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -46,7 +17,7 @@ steps:
       echo "$(Agent.ToolsDirectory)"
       cd $(Agent.ToolsDirectory)
       ls
-      npm help
+      git help
 - task: Cache@2
   displayName: 'Cache'
   inputs:
