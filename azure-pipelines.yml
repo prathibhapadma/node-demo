@@ -40,7 +40,7 @@ steps:
   inputs:
     command: 'install'
     workingDir: '$(npm_config_cache)'
-    customCommand: 'i -g npm@6.4.1' 
+    #customCommand: 'i -g npm@6.4.1' 
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
