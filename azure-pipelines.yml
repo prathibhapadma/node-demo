@@ -30,6 +30,7 @@ steps:
     targetType: 'inline'
     script: |
       node --version
+      node -v
 
 # - task: Npm@1
 #   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
