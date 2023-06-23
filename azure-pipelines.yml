@@ -33,7 +33,6 @@ steps:
       echo "$(Agent.ToolsDirectory)"
       cd $(Agent.ToolsDirectory)
       ls
-      git help
       npm install
 # - task: Npm@1
 #   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
