@@ -29,11 +29,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      echo Write your commands here      
-      echo "$(Agent.ToolsDirectory)"
-      cd $(Agent.ToolsDirectory)
-      ls
-      npm install
+      node --version
+
 # - task: Npm@1
 #   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
 #   condition: eq(variables.CACHE_RESTORED, 'true')
