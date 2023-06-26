@@ -28,6 +28,15 @@ steps:
     command: "install"
   displayName: "Npm Install"
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "node --version"
+      node -v
+        #npm install npm@6.9.0 -g
+      echo "npm version"
+      npm -v
 - task: NodeTool@0
   displayName: 'Install Node 8.9.1' 
   #condition: eq(variables.CACHE_RESTORED, 'true')
