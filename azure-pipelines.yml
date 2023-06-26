@@ -50,7 +50,7 @@ steps:
     command: custom
     verbose: false
     workingDir: '$(Build.SourcesDirectory)'
-    customCommand: 'install npm@6.4.1'
+    customCommand: 'i npm@6.4.1'
 
 # - task: NodeTool@0
 #   displayName: 'Install Node 8.9.1' 
