@@ -18,12 +18,14 @@ steps:
 #     #   npm
 #     path: '$(npm_config_cache)'
 #     cacheHitVar: 'CACHE_RESTORED' 
-- task: NodeTool@0
-  displayName: 'Install Node 8.9.1' 
-  #condition: eq(variables.CACHE_RESTORED, 'true')
-  #enabled: true
-  inputs:
-    versionSpec: '8.9.1'
+
+# - task: NodeTool@0
+#   displayName: 'Install Node 8.9.1' 
+#   #condition: eq(variables.CACHE_RESTORED, 'true')
+#   #enabled: true
+#   inputs:
+#     versionSpec: '8.9.1'
+
 # - task: NodeTool@0
 #   inputs:
 #     versionSpec: "16.x"
