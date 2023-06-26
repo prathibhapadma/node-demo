@@ -55,7 +55,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-    echo "npm"
+      echo "npm"
       npm -v    
 
 # - task: UseDotNet@2
