@@ -47,9 +47,9 @@ steps:
   #condition: eq(variables.CACHE_RESTORED, 'true')
   #enabled: true
   inputs:
-    command: custom
+    command: install
     workingDir: '$(Build.SourcesDirectory)'
-    customCommand: 'i npm@6.4.1'
+    #customCommand: 'i npm@6.4.1'
 
 # - task: NodeTool@0
 #   displayName: 'Install Node 8.9.1' 
