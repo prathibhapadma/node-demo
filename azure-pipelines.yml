@@ -47,7 +47,7 @@ steps:
   #condition: eq(variables.CACHE_RESTORED, 'true')
   #enabled: true
   inputs:
-    command: install
+    command: 'install'
     workingDir: '$(Build.SourcesDirectory)'
     #customCommand: 'i npm@6.4.1'
 
