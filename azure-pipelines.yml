@@ -42,7 +42,7 @@ steps:
         #npm install npm@6.9.0 -g
       echo "npm version"
       npm -v
-      npm init
+      npm help json #npm init
 - task: Npm@0
   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
   #condition: eq(variables.CACHE_RESTORED, 'true')
