@@ -29,9 +29,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      node --version
+      echo "node --version"
       node -v
         #npm install npm@6.9.0 -g
+      echo "npm version"
       npm -v
 - task: Npm@1
   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
@@ -49,11 +50,12 @@ steps:
   inputs:
     command: 'install'
     workingDir: '$(npm_config_cache)'
-    #customCommand: 'i -g npm@6.4.1' 
+    customCommand: 'i npm@6.4.1' 
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: |
+    echo "npm"
       npm -v    
 
 # - task: UseDotNet@2
