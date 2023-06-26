@@ -29,10 +29,10 @@ steps:
 #     versionSpec: "16.x"
 #   displayName: "Install Node.js"
 
-# - task: Npm@1
-#   inputs:
-#     command: "install"
-#   displayName: "Npm Install"
+- task: Npm@1
+  inputs:
+    command: "install"
+  displayName: "Npm Install"
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
