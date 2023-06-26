@@ -48,7 +48,6 @@ steps:
   #enabled: true
   inputs:
     command: custom
-    verbose: false
     workingDir: '$(Build.SourcesDirectory)'
     customCommand: 'i npm@6.4.1'
 
