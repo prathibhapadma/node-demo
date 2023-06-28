@@ -8,7 +8,24 @@ variables:
   dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
   node_config_cache: 'C:/hostedtoolcache/windows'
 
-steps:
+
+stages:
+  - stage: Build
+    jobs:
+      - job: Build
+        displayName: "Angular App Build"
+        # workspace:
+        #   clean: all
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "8.9.x"
+            displayName: "Install Node.js"
+
+          - task: Npm@1
+            inputs:
+              command: "install"
+              displayName: "Npm Install"
 # - task: Cache@2
 #   displayName: 'Cache'
 #   inputs:
@@ -18,33 +35,33 @@ steps:
 #     #   npm
 #     path: '$(npm_config_cache)'
 #     cacheHitVar: 'CACHE_RESTORED' 
-- task: NodeTool@0
-  displayName: 'Install Node 8.9.1' 
-  #condition: eq(variables.CACHE_RESTORED, 'true')
-  #enabled: true
-  inputs:
-    versionSpec: '8.9.1'
-    workingDir: '$(Build.SourcesDirectory)/'
-  retryCountOnTaskFailure: 5    
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo "node --version"
-      node -v
-        #npm install npm@6.9.0 -g
-      echo "npm version"
-      npm -v
-      npm help json #npm init
-- task: Npm@0
-  displayName: 'Global - Tools - Install npm 6.4.1' # bulding
-  #condition: eq(variables.CACHE_RESTORED, 'true')
-  #enabled: true
-  inputs:
-    command: 'install'
-    workingDir: '$(Build.SourcesDirectory)/'
-    #customCommand: 'i npm@6.4.1'
-  retryCountOnTaskFailure: 5 
+# - task: NodeTool@0
+#   displayName: 'Install Node 8.9.1' 
+#   #condition: eq(variables.CACHE_RESTORED, 'true')
+#   #enabled: true
+#   inputs:
+#     versionSpec: '8.9.1'
+#     workingDir: '$(Build.SourcesDirectory)/'
+#   retryCountOnTaskFailure: 5    
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       echo "node --version"
+#       node -v
+#         #npm install npm@6.9.0 -g
+#       echo "npm version"
+#       npm -v
+#       ##npm help json #npm init
+# - task: Npm@0
+#   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
+#   #condition: eq(variables.CACHE_RESTORED, 'true')
+#   #enabled: true
+#   inputs:
+#     command: 'install'
+#     workingDir: '$(Build.SourcesDirectory)/'
+#     #customCommand: 'i npm@6.4.1'
+#   retryCountOnTaskFailure: 5 
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
