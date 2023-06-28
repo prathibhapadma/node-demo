@@ -21,11 +21,19 @@ stages:
             inputs:
               versionSpec: "8.9.x"
             displayName: "Install Node.js"
-
           - task: Npm@1
             inputs:
               command: "install"
               displayName: "Npm Install"
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: |
+                echo "node --version"
+                node -v
+                  #npm install npm@6.9.0 -g
+                echo "npm version"
+                npm -v    
 # - task: Cache@2
 #   displayName: 'Cache'
 #   inputs:
@@ -62,15 +70,15 @@ stages:
 #     workingDir: '$(Build.SourcesDirectory)/'
 #     #customCommand: 'i npm@6.4.1'
 #   retryCountOnTaskFailure: 5 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo "node --version"
-      node -v
-        #npm install npm@6.9.0 -g
-      echo "npm version"
-      npm -v
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       echo "node --version"
+#       node -v
+#         #npm install npm@6.9.0 -g
+#       echo "npm version"
+#       npm -v
 # - task: Npm@1
 #   displayName: 'Global - Tools - Install npm 6.4.1' # bulding
 #   #condition: eq(variables.CACHE_RESTORED, 'true')
