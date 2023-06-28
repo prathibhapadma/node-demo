@@ -25,16 +25,7 @@ steps:
   inputs:
     versionSpec: '8.9.1'
     workingDir: '$(Build.SourcesDirectory)/'
-  retryCountOnTaskFailure: 5  
-# - task: NodeTool@0
-#   inputs:
-#     versionSpec: "16.x"
-#   displayName: "Install Node.js"
-
-# - task: Npm@1
-#   inputs:
-#     command: "install"
-#   displayName: "Npm Install"
+  retryCountOnTaskFailure: 5    
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -53,15 +44,7 @@ steps:
     command: 'install'
     workingDir: '$(Build.SourcesDirectory)/'
     #customCommand: 'i npm@6.4.1'
-  retryCountOnTaskFailure: 5
-
-# - task: NodeTool@0
-#   displayName: 'Install Node 8.9.1' 
-#   #condition: eq(variables.CACHE_RESTORED, 'true')
-#   enabled: true
-#   inputs:
-#     versionSpec: '8.9.1'
-#     workingDir: '$(npm_config_cache)'  
+  retryCountOnTaskFailure: 5 
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
