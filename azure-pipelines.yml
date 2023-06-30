@@ -19,7 +19,7 @@ stages:
         steps:
           - task: NodeTool@0
             inputs:
-              versionSpec: "8.9.x"
+              versionSpec: "8.12.0"
             displayName: "Install Node.js"
           - task: Npm@1
             inputs:
@@ -33,7 +33,8 @@ stages:
                 node -v
                   #npm install npm@6.9.0 -g
                 echo "npm version"
-                npm -v    
+                npm -v 
+
 # - task: Cache@2
 #   displayName: 'Cache'
 #   inputs:
