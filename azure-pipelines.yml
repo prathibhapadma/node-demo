@@ -20,7 +20,7 @@ steps:
 - checkout: self
 # - checkout: Selfrepo
 - script: |
-    echo Hello.
+    echo Hello $(Build.SourcesDirectory)/$(Build.Repository.Name).
   displayName: 'Run a multi-repo'
   continueOnError: true  
   
