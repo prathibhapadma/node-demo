@@ -3,16 +3,22 @@ trigger: none
 pool:
   vmImage: ubuntu-latest
 
-# resources:
-#   repositories:
-#     - repository: secondRepo
-#       type: github
-#       name: prathibhapadma/azure-aks-kubernetes-masterclass
-#       ref: $(Build.SourceBranch)
-#       endpoint: prathibhapadma
+resources:
+  repositories:
+    - repository: secondRepo
+      type: github
+      name: prathibhapadma/azure-aks-kubernetes-masterclass
+      ref: $(Build.SourceBranch)
+      endpoint: prathibhapadma
+    - repository: Selfrepo
+      type: github
+      name: prathibhapadma/node-demo
+      ref: $(Build.SourceBranch)
+      endpoint: prathibhapadma  
 
 steps:
 - checkout: self
+# - checkout: Selfrepo
 - script: |
     echo Hello.
   displayName: 'Run a multi-repo'
