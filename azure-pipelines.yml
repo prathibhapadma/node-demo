@@ -21,7 +21,7 @@ steps:
 # - checkout: Selfrepo
 - script: |
     echo Hello $(Build.SourcesDirectory)/$(Build.Repository.Name).
-    ls $(Build.SourcesDirectory)/$(Build.Repository.Name)/*/restoremodules.ps1
+    cat $(Build.SourcesDirectory)/$(Build.Repository.Name)/*/restoremodules.ps1
   displayName: 'Run a multi-repo'
   continueOnError: true  
   
