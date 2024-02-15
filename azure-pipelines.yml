@@ -12,6 +12,8 @@ resources:
       endpoint: prathibhapadma
 
 steps:
+- checkout: self
+- checkout: secondRepo
 - script: |
     echo Hello.
   displayName: 'Run a multi-repo'
