@@ -7,7 +7,7 @@ resources:
   repositories:
     - repository: secondRepo
       type: github
-      name: prathibhapadma/test-demo-api
+      name: prathibhapadma/azure-aks-kubernetes-masterclass
       ref: $(Build.SourceBranch)
       endpoint: prathibhapadma
 
