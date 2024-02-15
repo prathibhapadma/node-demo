@@ -17,7 +17,7 @@ steps:
 - script: |
     echo Hello $(Build.SourcesDirectory)/$(Build.Repository.Name).
     ls 
-    cat $(Build.SourcesDirectory)/scripts/restoremodules.ps1
+    cat $(Build.SourcesDirectory)/$(Build.Repository.Name)/scripts/restoremodules.ps1
   displayName: 'Run a multi-repo'
   continueOnError: true  
   
