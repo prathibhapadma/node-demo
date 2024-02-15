@@ -12,7 +12,7 @@ resources:
       endpoint: prathibhapadma  
 
 steps:
-- checkout: self
+#- checkout: self
 - checkout: Selfrepo
 - script: |
     echo Hello $(Build.SourcesDirectory)/$(Build.Repository.Name).
