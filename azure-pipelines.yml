@@ -1,39 +1,59 @@
 trigger: none
 
-pool: self-hosted-agent-win
-  #vmImage: windows-latest
+pool:
+  vmImage: ubuntu-latest
 
-variables:
-  npm_config_cache: '$(Agent.ToolsDirectory)/' #'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
-  dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
-  node_config_cache: 'C:/hostedtoolcache/windows'
+resources:
+  repositories:
+    - repository: secondRepo
+      type: github
+      name: prathibhapadma/test-demo-api
+      ref: $(Build.SourceBranch)
+      endpoint: prathibhapadma
+
+steps:
+- script: |
+    echo Hello.
+  displayName: 'Run a multi-repo'
+  continueOnError: true  
+  
+
+# trigger: none
+
+# pool: self-hosted-agent-win
+#   #vmImage: windows-latest
+
+# variables:
+#   npm_config_cache: '$(Agent.ToolsDirectory)/' #'C:/hostedtoolcache/windows' #/.npm' #'$(Agent.ToolsDirectory)\.npm' #$(Agent.HomeDirectory)/.npm node
+#   dotnet_config_cache: 'C:/hostedtoolcache/windows/dotnet'
+#   node_config_cache: 'C:/hostedtoolcache/windows'
 
 
-stages:
-  - stage: Build
-    jobs:
-      - job: Build
-        displayName: "Angular App Build"
-        # workspace:
-        #   clean: all
-        steps:
-          - task: NodeTool@0
-            inputs:
-              versionSpec: "8.12.0"
-            displayName: "Install Node.js"
-          - task: Npm@1
-            inputs:
-              command: "install"
-              displayName: "Npm Install"
-          - task: PowerShell@2
-            inputs:
-              targetType: 'inline'
-              script: |
-                echo "node --version"
-                node -v
-                  #npm install npm@6.9.0 -g
-                echo "npm version"
-                npm -v 
+# stages:
+#   - stage: Build
+#     jobs:
+#       - job: Build
+#         displayName: "Angular App Build"
+#         # workspace:
+#         #   clean: all
+#         steps:
+#           - task: NodeTool@0
+#             inputs:
+#               versionSpec: "8.12.0"
+#             displayName: "Install Node.js"
+#           - task: Npm@1
+#             inputs:
+#               command: "install"
+#               displayName: "Npm Install"
+#           - task: PowerShell@2
+#             inputs:
+#               targetType: 'inline'
+#               script: |
+#                 echo "node --version"
+#                 node -v
+#                   #npm install npm@6.9.0 -g
+#                 echo "npm version"
+#                 npm -v 
 
 # - task: Cache@2
 #   displayName: 'Cache'
