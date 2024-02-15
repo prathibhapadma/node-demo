@@ -5,11 +5,6 @@ pool:
 
 resources:
   repositories:
-    - repository: secondRepo
-      type: github
-      name: prathibhapadma/azure-aks-kubernetes-masterclass
-      ref: $(Build.SourceBranch)
-      endpoint: prathibhapadma
     - repository: Selfrepo
       type: github
       name: prathibhapadma/node-demo
