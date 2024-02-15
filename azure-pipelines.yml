@@ -18,7 +18,7 @@ resources:
 
 steps:
 - checkout: self
-# - checkout: Selfrepo
+- checkout: Selfrepo
 - script: |
     echo Hello $(Build.SourcesDirectory)/$(Build.Repository.Name).
     ls $(Build.SourcesDirectory)/$(Build.Repository.Name)
